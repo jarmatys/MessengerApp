@@ -1,0 +1,23 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Logowanie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Logowanie</h1>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(x => x.Login)
+    @Html.TextBoxFor(x => x.Login)
+    <br />
+
+    @Html.LabelFor(x => x.Password)
+    @Html.PasswordFor(x => x.Password)
+    <br />
+
+    <button>Zaloguj</button>
+}

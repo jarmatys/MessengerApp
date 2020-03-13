@@ -4,6 +4,10 @@
     <title>MessengerApp - @ViewData["Title"]</title>
 </head>
 <body>
+    <div>
+        <a href="@Url.Action("Login","Account")">Logowanie</a>
+        <a href="@Url.Action("Register","Account")">Rejestracja</a>
+    </div>
     @RenderBody()
 </body>
 </html>

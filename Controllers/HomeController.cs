@@ -12,5 +12,6 @@ namespace MessengerApp.Controllers
         {
             return View();
         }
+
     }
 }
