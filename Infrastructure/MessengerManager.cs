@@ -38,5 +38,11 @@ namespace MessengerApp.Infrastructure
             return mes;
         }
 
+        public async Task<MessageModel> GetById(int Id)
+        {
+            return await _context.Messages.FindAsync(Id);
+        }
+
+   
     }
 }

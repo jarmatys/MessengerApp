@@ -65,5 +65,6 @@ namespace MessengerApp.Controllers
 
             return RedirectToAction("List", "Messenger");
         }
+   
     }
 }
