@@ -8,9 +8,21 @@
 <h1>Lista wiadomości</h1>
 
 <ol>
-    @foreach(var mes in Model)
+    @foreach (var mes in Model)
     {
-        <li>@mes.User.UserName - @mes.AddDate - @mes.Text</li>
+        <li>
+            @mes.User.UserName - @mes.AddDate - @mes.Text
+
+            @if (User.Identity.Name == mes.User.UserName)
+            {
+                <a href="@Url.Action("Delete","Messenger",new { Id = mes.Id})">Usuń</a>
+
+                @if (DateTime.Now.Subtract(mes.AddDate).Minutes < 10)
+                {
+                    <a href="@Url.Action("Edit","Messenger",new { Id = mes.Id})">Edytuj</a>
+                }
+            }
+        </li>
     }
 </ol>
 

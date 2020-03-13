@@ -11,10 +11,10 @@ namespace MessengerApp.Controllers
     public class AccountController : Controller
     {
         // Zaleśności do logowania i rejestracji użytkowników
-        protected UserManager<IdentityUser> _userManager { get; }
-        protected SignInManager<IdentityUser> _signInManager { get; }
+        protected UserManager<User> _userManager { get; }
+        protected SignInManager<User> _signInManager { get; }
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -33,7 +33,7 @@ namespace MessengerApp.Controllers
             if (ModelState.IsValid)
             {
                 // Tworzymy użytkownika na podstawie przesłanych danych
-                var user = new IdentityUser(viewData.Login) { Email = viewData.Email };
+                var user = new User() { UserName = viewData.Login, Email = viewData.Email};
                 var result = await _userManager.CreateAsync(user, viewData.Password);
 
                 if (result.Succeeded)

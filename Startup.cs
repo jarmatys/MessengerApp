@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MessengerApp.Infrastructure;
+using MessengerApp.Models.Account;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +41,7 @@ namespace MessengerApp
             });
 
             // Wstrzykiwanie zale¿noœci o identifykacji u¿ytkowników
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 // Opcje dotycz¹ce has³a
                 options.Password.RequireDigit = false;

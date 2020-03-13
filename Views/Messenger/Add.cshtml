@@ -1,8 +1,17 @@
-﻿
+﻿@model MessageViewModel
+
 @{
     ViewData["Title"] = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add</h1>
+<h1>Dodaj wiadomość</h1>
 
+@using (Html.BeginForm("Add", "Messenger", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.Text)
+    @Html.TextBoxFor(x => x.Text)
+
+    <br />
+    <button>Dodaj wiadomość</button>
+}

@@ -1,4 +1,5 @@
 ﻿using MessengerApp.Models.Messenger;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,27 @@ namespace MessengerApp.Infrastructure
             _context = context;
         }
 
-        public void Add(MessageModel mes)
+        public async Task<MessageModel> Add(MessageModel mes)
         {
-            mes.AddDate = DateTime.Now;
             _context.Messages.Add(mes);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            return mes;
         }
 
         public List<MessageModel> GetAll()
         {
-            return _context.Messages.ToList();
+            return _context.Messages.Include(x => x.User).ToList();
         }
+
+        public async Task<MessageModel> Delete(int Id)
+        {
+            var mes = _context.Messages.Find(Id);
+
+            _context.Remove(mes);
+            await _context.SaveChangesAsync();
+
+            return mes;
+        }
+
     }
 }

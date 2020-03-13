@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MessengerApp.Models.Account
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser
     {
         public ICollection<MessageModel> Messages { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using MessengerApp.Models.Messenger;
+﻿using MessengerApp.Models.Account;
+using MessengerApp.Models.Messenger;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MessengerApp.Infrastructure
 {
-    public class EfContext : IdentityDbContext
+    public class EfContext : IdentityDbContext<User>
     {
         public EfContext(DbContextOptions<EfContext> options) : base(options) { }
 
