@@ -21,5 +21,10 @@ namespace MessengerApp.Infrastructure
             _context.Messages.Add(mes);
             _context.SaveChanges();
         }
+
+        public List<MessageModel> GetAll()
+        {
+            return _context.Messages.ToList();
+        }
     }
 }

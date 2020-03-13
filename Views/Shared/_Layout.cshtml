@@ -5,8 +5,20 @@
 </head>
 <body>
     <div>
-        <a href="@Url.Action("Login","Account")">Logowanie</a>
-        <a href="@Url.Action("Register","Account")">Rejestracja</a>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.Action("Login","Account")">Logowanie</a>
+            <a href="@Url.Action("Register","Account")">Rejestracja</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Logout","Account")">Wyloguj</a>
+        }
+    </div>
+    <div>
+        <p>Menu:</p>
+        <a href="@Url.Action("List","Messenger")">Lista</a>
+        <a href="@Url.Action("Add","Messenger")">Dodaj</a>
     </div>
     @RenderBody()
 </body>
