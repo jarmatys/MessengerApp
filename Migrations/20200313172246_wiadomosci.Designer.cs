@@ -4,14 +4,16 @@ using MessengerApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MessengerApp.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20200313172246_wiadomosci")]
+    partial class wiadomosci
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace MessengerApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MessengerApp.Models.Account.User", b =>
+            modelBuilder.Entity("MessengerApp.Models.Account.UserInfoModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +72,7 @@ namespace MessengerApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("UserInfoModel");
                 });
 
             modelBuilder.Entity("MessengerApp.Models.Messenger.MessageModel", b =>
@@ -87,12 +89,12 @@ namespace MessengerApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserInfoModelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserInfoModelId");
 
                     b.ToTable("Messages");
                 });
@@ -295,9 +297,9 @@ namespace MessengerApp.Migrations
 
             modelBuilder.Entity("MessengerApp.Models.Messenger.MessageModel", b =>
                 {
-                    b.HasOne("MessengerApp.Models.Account.User", "User")
+                    b.HasOne("MessengerApp.Models.Account.UserInfoModel", "User")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserInfoModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

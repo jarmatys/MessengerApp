@@ -51,6 +51,8 @@ namespace MessengerApp
 
             }).AddEntityFrameworkStores<EfContext>();
 
+            // Dodajemy do kontenera zale¿noœci menad¿era wiadomoœci
+            services.AddScoped<MessengerManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,7 +62,9 @@ namespace MessengerApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
