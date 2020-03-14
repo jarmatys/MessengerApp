@@ -15,12 +15,14 @@ namespace MessengerApp.Controllers
     public class MessengerController : Controller
     {
         private readonly MessengerManager _messenger;
+        private readonly ChannelManager _channel;
         private readonly UserManager<User> _userManager;
 
-        public MessengerController(MessengerManager manager, UserManager<User> userManager)
+        public MessengerController(MessengerManager manager, UserManager<User> userManager, ChannelManager channel)
         {
             _userManager = userManager;
             _messenger = manager;
+            _channel = channel;
         }
 
         [HttpGet]
@@ -31,8 +33,10 @@ namespace MessengerApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int Id)
         {
+            // Id kanału
+            ViewBag.ChannelId = Id;
             return View();
         }
 
@@ -42,15 +46,17 @@ namespace MessengerApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
+                var channel = await _channel.GetChannelById(result.ChannelId);
                 var message = new MessageModel
                 {
                     AddDate = DateTime.Now,
                     Text = result.Text,
-                    User = user
+                    User = user,
+                    Chanel = channel             
                 };
                 await _messenger.Add(message);
 
-                return RedirectToAction("List", "Messenger");
+                return RedirectToAction("join", "Channel", new { Id = result.ChannelId});
             }
             return View();
         }

@@ -11,5 +11,7 @@ namespace MessengerApp.Models.Messenger
         [Required]
         [Display(Name = "Treść wiadomości")]
         public string Text { get; set; }
+
+        public int ChannelId { get; set; }
     }
 }

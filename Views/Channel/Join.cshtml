@@ -5,13 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Witaj na kanale <strong>@Model.Name</strong></h1>
+<p style="font-size: 26px;color:white; background-color:@Model.Color">Witaj na kanale <strong>@Model.Name</strong></p>
 
 <div style="border:1px dashed black;">
-    @using (Html.BeginForm("Add", "Messenger", FormMethod.Post))
-    {
-
-    }
+    <button><a href="@Url.Action("Add","Messenger", new { Id = Model.Id})">Dodaj wiadomość</a></button>
 </div>
 
 @if(Model.Messages.Count == 0)

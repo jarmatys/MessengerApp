@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm("Add", "Messenger", FormMethod.Post))
 {
+    <input type="hidden" name="ChannelId" value="@ViewBag.ChannelId" />
     @Html.LabelFor(x => x.Text)
     @Html.TextBoxFor(x => x.Text)
 

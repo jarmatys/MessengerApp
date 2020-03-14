@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MessengerApp.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessengerApp.Controllers
 {
+    [Authorize]
     public class ChannelController : Controller
     {
         private readonly ChannelManager _channel;
@@ -25,6 +27,11 @@ namespace MessengerApp.Controllers
         {
             var channel = await _channel.GetChannelById(Id);
             return View(channel);
+        }
+
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }
