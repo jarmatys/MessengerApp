@@ -1,1 +1,21 @@
-﻿
+﻿@model ChannelViewModel
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dodawanie kanału</h1>
+@using (Html.BeginForm("add", "channel", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.Color)
+    @Html.TextBoxFor(x => x.Color)
+    <br />
+
+    @Html.LabelFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Name)
+
+    <br />
+    <button>Dodaj kanał</button>
+}
+
