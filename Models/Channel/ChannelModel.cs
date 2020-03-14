@@ -14,6 +14,8 @@ namespace MessengerApp.Models.Channel
 
         public string Color  { get; set; }
 
+        public bool isDefault { get; set; }
+
         public User OwnerUser { get; set; }
 
         public ICollection<SubscriptionModel> Subscription { get; set; }

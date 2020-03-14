@@ -22,5 +22,12 @@ namespace MessengerApp.Infrastructure
             return await _context.Channels.Include(x=> x.OwnerUser).ToListAsync();
         }
 
+        public async Task<ChannelModel> CreateChannel(ChannelModel result)
+        {
+            _context.Channels.Add(result);
+            await _context.SaveChangesAsync();
+            return result;
+        }
+
     }
 }

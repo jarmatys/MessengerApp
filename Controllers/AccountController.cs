@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MessengerApp.Infrastructure;
 using MessengerApp.Models.Account;
+using MessengerApp.Models.Channel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +15,13 @@ namespace MessengerApp.Controllers
         // Zaleśności do logowania i rejestracji użytkowników
         protected UserManager<User> _userManager { get; }
         protected SignInManager<User> _signInManager { get; }
+        private readonly ChannelManager _channel;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ChannelManager channel)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _channel = channel;
         }
 
         [HttpGet]
@@ -33,13 +37,24 @@ namespace MessengerApp.Controllers
             if (ModelState.IsValid)
             {
                 // Tworzymy użytkownika na podstawie przesłanych danych
-                var user = new User() { UserName = viewData.Login, Email = viewData.Email};
+                var user = new User() { UserName = viewData.Login, Email = viewData.Email };
                 var result = await _userManager.CreateAsync(user, viewData.Password);
 
                 if (result.Succeeded)
                 {
                     // Logujemy użytkownika z ustawieniem aby nie był zapamiętany za pierwszym razem
                     await _signInManager.SignInAsync(user, false);
+
+                    // Zakładamy użytkownikowi domyślny kanał którego nie może usunąć 
+                    var defaultChannel = new ChannelModel
+                    {
+                        Name = $"Kanał użytkownika {viewData.Login}",
+                        Color = "Green",
+                        OwnerUser = user,
+                        isDefault = true
+                    };
+                    await _channel.CreateChannel(defaultChannel);
+
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (var error in result.Errors)
