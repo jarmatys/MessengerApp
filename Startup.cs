@@ -54,6 +54,7 @@ namespace MessengerApp
 
             // Dodajemy do kontenera zale¿noœci menad¿era wiadomoœci
             services.AddScoped<MessengerManager>();
+            services.AddScoped<ChannelManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

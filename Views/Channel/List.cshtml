@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ChannelModel>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista dostępnych kanałów</h1>
+
+
+<ul>
+    @foreach(var channel in Model)
+    {
+        <li>@channel.Name - @channel.OwnerUser - @channel.Color</li>
+    }
+</ul>

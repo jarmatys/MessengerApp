@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MessengerApp.Models.Messenger
+namespace MessengerApp.Models.Channel
 {
     public class SubscriptionModel
     {
@@ -12,6 +12,6 @@ namespace MessengerApp.Models.Messenger
 
         public User User { get; set; }
 
-        public ChanelModel Channel { get; set; }
+        public ChannelModel Channel { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MessengerApp.Models.Account;
+using MessengerApp.Models.Channel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,6 @@ namespace MessengerApp.Models.Messenger
 
         public User User { get; set; }
 
-        public ChanelModel Chanel { get; set; }
+        public ChannelModel Chanel { get; set; }
     }
 }
