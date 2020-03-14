@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ChannelModel>
+
+@{
+    ViewData["Title"] = "Subskrypcje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista Twoich subskrypcji</h1>
+
+
+<ul>
+    @foreach (var channel in Model)
+    {
+        <li style="Color:@channel.Color">
+            @channel.Name - <strong>Właściciel: </strong>@channel.OwnerUser
+            <a href="@Url.Action("Join","Channel",new { Id = channel.Id})">Dołącz do kanału</a>
+        </li>
+    }
+</ul>

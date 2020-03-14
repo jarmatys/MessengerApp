@@ -38,7 +38,7 @@ namespace MessengerApp.Infrastructure
 
         public async Task<ChannelModel> GetChannelById(int Id)
         {
-            var channel = await _context.Channels.Include(x => x.OwnerUser).Include(x => x.Messages).FirstOrDefaultAsync(x => x.Id == Id);
+            var channel = await _context.Channels.Include(x => x.Messages).Include(x => x.OwnerUser).FirstOrDefaultAsync(x => x.Id == Id);
             return channel;
         }
 

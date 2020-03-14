@@ -13,6 +13,7 @@
     {
         <li style="Color:@channel.Color">@channel.Name - <strong>Właściciel: </strong>@channel.OwnerUser
             <a href="@Url.Action("Join","Channel",new { Id = channel.Id})">Dołącz do kanału</a>
+            <a href="@Url.Action("Subscribe","Channel",new { Id = channel.Id})">Subskrybuj</a>
         </li>
     }
 </ul>

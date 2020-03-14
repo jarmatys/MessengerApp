@@ -16,11 +16,13 @@ namespace MessengerApp.Controllers
     {
         private readonly ChannelManager _channel;
         private readonly UserManager<User> _userManager;
+        private readonly SubscribeManager _subscription;
 
-        public ChannelController(ChannelManager channel, UserManager<User> userManager)
+        public ChannelController(ChannelManager channel, UserManager<User> userManager, SubscribeManager sub)
         {
             _userManager = userManager;
             _channel = channel;
+            _subscription = sub;
         }
 
         public async Task<IActionResult> List()
@@ -48,7 +50,8 @@ namespace MessengerApp.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
 
-                var newChannel = new ChannelModel {
+                var newChannel = new ChannelModel
+                {
                     Color = result.Color,
                     Name = result.Name,
                     OwnerUser = user,
@@ -59,5 +62,25 @@ namespace MessengerApp.Controllers
             }
             return View(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Subscribe(int Id)
+        {
+            var channel = await _channel.GetChannelById(Id);
+            var user = await _userManager.GetUserAsync(User);
+
+            await _subscription.SubscribeChannel(user, channel);
+
+            return RedirectToAction("Subscribes", "Channel");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Subscribes()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var channels = await _subscription.GetSubscribeChannel(user);
+            return View(channels);
+        }
+
     }
 }
