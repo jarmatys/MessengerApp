@@ -34,7 +34,7 @@ namespace MessengerApp.Infrastructure
 
         public async Task<List<ChannelModel>> GetSubscribeChannel(User user)
         {
-            var channels = await _context.Channels.Where(x => x.OwnerUser == user).ToListAsync();
+            var channels = await _context.Subscriptions.Where(x => x.User == user).Include(x => x.Channel).Select(x => x.Channel).ToListAsync();
             return channels;
         }
 
