@@ -1,4 +1,5 @@
 ﻿using MessengerApp.Models.Account;
+using MessengerApp.Models.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace MessengerApp.Models.Channel
         public User OwnerUser { get; set; }
 
         public ICollection<SubscriptionModel> Subscription { get; set; }
+
+        public ICollection<MessageModel> Messages { get; set; }
 
     }
 }

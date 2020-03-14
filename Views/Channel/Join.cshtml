@@ -1,0 +1,31 @@
+﻿@model ChannelModel
+
+@{
+    ViewData["Title"] = "Join";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Witaj na kanale <strong>@Model.Name</strong></h1>
+
+<div style="border:1px dashed black;">
+    @using (Html.BeginForm("Add", "Messenger", FormMethod.Post))
+    {
+
+    }
+</div>
+
+@if(Model.Messages.Count == 0)
+{
+    <strong style="color:red;">Brak wiadomości do wyświetlenia</strong>
+}
+else
+{
+<ul>
+    @foreach (var messages in Model.Messages)
+    {
+        <li>@messages.Text - <strong>Użytkownik: </strong>@messages.User.UserName</li>
+    }
+</ul>
+}
+
+

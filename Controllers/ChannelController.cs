@@ -20,5 +20,11 @@ namespace MessengerApp.Controllers
             var channels = await _channel.GetAll();
             return View(channels);
         }
+
+        public async Task<IActionResult> Join(int Id)
+        {
+            var channel = await _channel.GetChannelById(Id);
+            return View(channel);
+        }
     }
 }

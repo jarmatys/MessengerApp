@@ -89,6 +89,5 @@ namespace MessengerApp.Controllers
             }
             return View(result);
         }
-
     }
 }

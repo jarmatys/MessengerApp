@@ -11,6 +11,8 @@
 <ul>
     @foreach(var channel in Model)
     {
-        <li>@channel.Name - @channel.OwnerUser - @channel.Color</li>
+        <li style="Color:@channel.Color">@channel.Name - <strong>Właściciel: </strong>@channel.OwnerUser
+            <a href="@Url.Action("Join","Channel",new { Id = channel.Id})">Dołącz do kanału</a>
+        </li>
     }
 </ul>
