@@ -10,5 +10,9 @@ namespace MessengerApp.Models.Account
     public class User : IdentityUser
     {
         public ICollection<MessageModel> Messages { get; set; }
+
+        public ICollection<ChanelModel> Channels { get; set; }
+
+        public ICollection<SubscriptionModel> Subscriptions { get; set; }
     }
 }

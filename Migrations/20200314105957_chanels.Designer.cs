@@ -4,14 +4,16 @@ using MessengerApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MessengerApp.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20200314105957_chanels")]
+    partial class chanels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,28 +136,6 @@ namespace MessengerApp.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("MessengerApp.Models.Messenger.SubscriptionModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ChannelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChannelId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SubscriptionModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -304,17 +284,6 @@ namespace MessengerApp.Migrations
 
                     b.HasOne("MessengerApp.Models.Account.User", "User")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("MessengerApp.Models.Messenger.SubscriptionModel", b =>
-                {
-                    b.HasOne("MessengerApp.Models.Messenger.ChanelModel", "Channel")
-                        .WithMany("Subscription")
-                        .HasForeignKey("ChannelId");
-
-                    b.HasOne("MessengerApp.Models.Account.User", "User")
-                        .WithMany("Subscriptions")
                         .HasForeignKey("UserId");
                 });
 
