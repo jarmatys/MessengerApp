@@ -1,0 +1,19 @@
+﻿@model MessageModel
+
+@{
+    ViewData["Title"] = "Edytuj wiadomośc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edytuj wiadomość</h1>
+
+@using (Html.BeginForm("Edit", "Messenger", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    @Html.LabelFor(x => x.Text)
+    @Html.TextBoxFor(x => x.Text)
+    <br />
+
+    <button>Edytuj wiadomość</button>
+}

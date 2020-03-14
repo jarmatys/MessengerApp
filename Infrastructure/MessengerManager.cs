@@ -23,11 +23,6 @@ namespace MessengerApp.Infrastructure
             return mes;
         }
 
-        public List<MessageModel> GetAll()
-        {
-            return _context.Messages.Include(x => x.User).ToList();
-        }
-
         public async Task<MessageModel> Delete(int Id)
         {
             var mes = _context.Messages.Find(Id);
@@ -42,7 +37,16 @@ namespace MessengerApp.Infrastructure
         {
             return await _context.Messages.FindAsync(Id);
         }
+        public async Task<List<MessageModel>> GetAll()
+        {
+            return await _context.Messages.Include(x => x.User).ToListAsync();
+        }
 
-   
+        public async Task<MessageModel> Edit(MessageModel mes)
+        {
+            _context.Messages.Update(mes);
+            await _context.SaveChangesAsync();
+            return mes;
+        }
     }
 }

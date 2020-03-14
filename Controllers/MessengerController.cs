@@ -24,9 +24,9 @@ namespace MessengerApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            var mesList = _messenger.GetAll();
+            var mesList = await _messenger.GetAll();
             return View(mesList);
         }
 
@@ -58,13 +58,37 @@ namespace MessengerApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if(id > 0)
+            if (id > 0)
             {
                 await _messenger.Delete(id);
             }
 
             return RedirectToAction("List", "Messenger");
         }
-   
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var mes = await _messenger.GetById(Id);
+            return View(mes);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MessageModel result)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                var mes = await _messenger.GetById(result.Id);
+                mes.User = user;
+                mes.Text = result.Text;
+
+                await _messenger.Edit(mes);
+                return RedirectToAction("List", "Messenger");
+            }
+            return View(result);
+        }
+
     }
 }
